@@ -11,6 +11,7 @@ const presets = [
 ];
 let colorContainer = document.querySelector('#colorSelector');
 let colorTable = document.createElement('table');
+colorTable.setAttribute('id', 'boot-color-table')
 let colorRow;
 let colorCell;
 for(let i=0; i < presets.length; i++){
@@ -23,15 +24,14 @@ for(let i=0; i < presets.length; i++){
   colorCell.innerHTML = presets[i]
   colorRow.append(colorCell)
 }
-colorContainer.append(colorTable)
-let colors = document.getElementsByTagName('td');
-let boot = document.querySelector('#boot')
-console.log(colors)
+colorTable.append(colorRow);
+colorContainer.append(colorTable);
+let colors = document.querySelectorAll('#boot-color-table td');
+let boot = document.querySelector('#boot-color')
 for(let i=0; i<colors.length; i++){
   colors[i].addEventListener("click", (event)=>{
      for(let i=0; i<boot.children.length; i++){
-       boot.children[i].style.fill = event.target.textContent
-       console.log(event.target.textContent)
+       boot.children[i].style.fill = event.target.style.backgroundColor
      }
    })
 }
