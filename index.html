@@ -19,8 +19,10 @@
       td {
         min-width: 48px;
         min-height: 48px;
-        font-size: 2em;
+        color:transparent;
+        border-radius: 50%;
       }
+
     </style>
   </head>
   <body>
@@ -160,7 +162,11 @@
       </svg>
     </div>
     <div id="colorSelector">
-      <h3>Boot Colors</h3>
+      <form id="newColorForm" action="index.html">
+        <input type="color" id="newColor">
+        <input type="submit" name="" value="Create">
+      </form>
+
     </div>
     <script src="index.js" charset="utf-8"></script>
   </body>

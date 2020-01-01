@@ -9,30 +9,52 @@ const presets = [
   "#e8a656",
   "#faca0c"
 ];
+const parts = [
+  "#laces",
+  "#boot-color",
+]
 let colorContainer = document.querySelector('#colorSelector');
 let colorTable = document.createElement('table');
 colorTable.setAttribute('id', 'boot-color-table')
-let colorRow;
-let colorCell;
-for(let i=0; i < presets.length; i++){
-  if(i % 4 == 0){
-    if(colorRow){colorTable.append(colorRow)}
-    colorRow = document.createElement('tr');
-  }
-  colorCell = document.createElement('td');
-  colorCell.style.backgroundColor = presets[i]
-  colorCell.innerHTML = presets[i]
-  colorRow.append(colorCell)
-}
+let colorRow = document.createElement('tr');
 colorTable.append(colorRow);
 colorContainer.append(colorTable);
-let colors = document.querySelectorAll('#boot-color-table td');
-let boot = document.querySelector('#boot-color')
-for(let i=0; i<colors.length; i++){
-  colors[i].addEventListener("click", (event)=>{
-     for(let i=0; i<boot.children.length; i++){
-       boot.children[i].style.fill = event.target.style.backgroundColor
-     }
-   })
+let colorCell;
+let target = document.querySelector('#boot-color')
+
+for(let i=0; i<parts.length; i++){
+  let part = document.querySelector(parts[i])
+  part.addEventListener("click", (event)=>{
+    console.log(part)
+    target = part
+  })
 }
-  // this.style.fill = "#fcc7da"
+
+function addColor(color){
+  let currentRow = colorTable.lastChild;
+  if(currentRow.children.length >= 4){
+    currentRow = document.createElement('tr');
+    colorTable.append(currentRow)
+  }
+  colorCell = document.createElement('td');
+  colorCell.style.backgroundColor = color;
+  colorCell.innerHTML = color;
+  currentRow.append(colorCell)
+  colorCell.addEventListener("click", (event)=>{
+    target.style.fill = event.target.style.backgroundColor;
+   })
+
+}
+for(let i=0; i < presets.length; i++){
+  addColor(presets[i])
+}
+
+
+
+let newColorForm = document.querySelector("#newColorForm")
+newColorForm.addEventListener("submit",(event)=>{
+  event.preventDefault();
+  console.log("form submitted")
+  let newColor = document.querySelector('#newColor').value;
+  addColor(newColor);
+})
