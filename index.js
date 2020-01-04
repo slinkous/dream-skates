@@ -10,8 +10,10 @@ const presets = [
   "#faca0c"
 ];
 const parts = [
-  "#laces",
+  "#laces-color",
   "#boot-color",
+  "#toestop-color",
+  "#wheels-color"
 ]
 let colorContainer = document.querySelector('#colorSelector');
 let colorTable = document.createElement('table');
@@ -57,4 +59,15 @@ newColorForm.addEventListener("submit",(event)=>{
   console.log("form submitted")
   let newColor = document.querySelector('#newColor').value;
   addColor(newColor);
+})
+
+let metallicToggle = document.querySelector('#metallic-toggle');
+let metallicTexture = document.querySelector('#texture-metallic')
+metallicTexture.style.display = 'none';
+metallicToggle.addEventListener('change', (event)=>{
+  if(!metallicToggle.checked){
+    metallicTexture.style.display = 'none';
+  } else {
+    metallicTexture.style.display = 'inline';
+  }
 })
